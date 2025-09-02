@@ -1,0 +1,5 @@
+{
+  "data_folder": "/path/to/your/data/folder",
+  "auto_save_delay": 10,
+  "auto_save_enabled": true
+}

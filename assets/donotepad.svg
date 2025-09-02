@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="purpleBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6"/>
+      <stop offset="100%" style="stop-color:#7c3aed"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Purple circular background -->
+  <circle cx="64" cy="64" r="56" fill="url(#purpleBg)"/>
+  
+  <!-- Upper checkmark (main) -->
+  <path d="M42 50 L56 64 L86 34" stroke="white" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Lower checkmark (low opacity) -->
+  <path d="M42 74 L56 88 L86 58" stroke="white" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+  
+  <!-- Three dots at bottom right (horizontal, within circle) -->
+  <circle cx="76" cy="96" r="3" fill="white" opacity="0.8"/>
+  <circle cx="84" cy="96" r="3" fill="white" opacity="0.8"/>
+  <circle cx="92" cy="96" r="3" fill="white" opacity="0.8"/>
+</svg>

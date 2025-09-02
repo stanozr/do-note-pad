@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools-scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "donotepad"
+version = "1.0.1"
+description = "A beautiful, lightweight productivity app for managing todos and notes"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "DoNotePad Team", email = "contact@donotepad.com"},
+]
+keywords = ["todo", "notes", "productivity", "gtk", "flet"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business",
+    "Topic :: Utilities",
+]
+dependencies = [
+    "flet>=0.21.0",
+    "python-dateutil>=2.8.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/donotepad/donotepad"
+Documentation = "https://github.com/donotepad/donotepad/wiki"
+Repository = "https://github.com/donotepad/donotepad.git"
+"Bug Tracker" = "https://github.com/donotepad/donotepad/issues"
+
+[project.scripts]
+donotepad = "main:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.setuptools.package-data]
+"*" = ["*.txt", "*.md"]

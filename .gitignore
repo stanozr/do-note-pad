@@ -1,0 +1,11 @@
+.venv/
+build/
+test_data/
+
+app-requirements.txt
+
+# Windows build artifacts
+build_windows*
+WINDOWS*
+
+**/*.yml.bak
