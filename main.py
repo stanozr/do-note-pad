@@ -528,11 +528,13 @@ class DoNotePadApp:
                                 expand=True,
                                 extension_set=ft.MarkdownExtensionSet.GITHUB_WEB,
                                 auto_follow_links=True,
+                                selectable=True,
                             ),
                             expand=True,
-                            padding=ft.padding.all(16),
-                            bgcolor=ft.Colors.GREY_50,
+                            padding=ft.padding.all(20),
+                            bgcolor=ft.Colors.WHITE,
                             border_radius=8,
+                            border=ft.border.all(1, ft.Colors.GREY_300),
                         ),
                     ], expand=True, scroll=ft.ScrollMode.AUTO),
                 ),
@@ -936,7 +938,7 @@ class DoNotePadApp:
         # Update preview - markdown is now in tab 0, nested in container
         preview_tab = self.note_editor.tabs[0].content
         preview_markdown = preview_tab.controls[0].content  # Container -> Markdown
-        preview_markdown.value = note.content or "# Empty Note\n\nStart writing..."
+        preview_markdown.value = self._improve_markdown_spacing(note.content) if note.content else "# Empty Note\n\nStart writing..."
         
         # Switch to preview tab when selecting a note (now tab 0)
         self.note_editor.selected_index = 0
@@ -949,6 +951,35 @@ class DoNotePadApp:
         
         self.page.update()
     
+    def _improve_markdown_spacing(self, content: str) -> str:
+        """Improve markdown spacing by adding blank lines around headings."""
+        if not content:
+            return content
+        
+        # Simple improvement: ensure headings have space around them
+        lines = content.split('\n')
+        improved_lines = []
+        
+        for i, line in enumerate(lines):
+            # Add space before headings (if previous line has content)
+            if (line.strip().startswith('#') and 
+                i > 0 and 
+                lines[i-1].strip() and 
+                not lines[i-1].strip().startswith('#')):
+                improved_lines.append('')
+            
+            improved_lines.append(line)
+            
+            # Add space after headings (if next line has content)  
+            if (line.strip().startswith('#') and 
+                i < len(lines) - 1 and 
+                lines[i+1].strip() and 
+                not lines[i+1].strip().startswith('#')):
+                improved_lines.append('')
+        
+        return '\n'.join(improved_lines)
+    
+
     def update_note_status(self):
         """Update the note status indicator."""
         if not self.current_note:
@@ -1214,7 +1245,7 @@ class DoNotePadApp:
             # Update preview tab with new content
             preview_tab = self.note_editor.tabs[0].content
             preview_markdown = preview_tab.controls[0].content
-            preview_markdown.value = e.control.value or "# Empty Note"
+            preview_markdown.value = self._improve_markdown_spacing(e.control.value) if e.control.value else "# Empty Note"
             
             self.page.update()
     
@@ -1236,7 +1267,7 @@ class DoNotePadApp:
             # Also update the preview tab
             preview_tab = self.note_editor.tabs[0].content
             preview_markdown = preview_tab.controls[0].content
-            preview_markdown.value = content or "# Empty Note\n\nStart writing..."
+            preview_markdown.value = self._improve_markdown_spacing(content) if content else "# Empty Note\n\nStart writing..."
             
             # Refresh the notes list to show updated title
             self.refresh_notes()
